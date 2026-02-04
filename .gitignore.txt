@@ -1,0 +1,6 @@
+*.html
+*.xml
+*.log
+report.*
+log.*
+output.*

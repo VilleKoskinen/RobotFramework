@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.1.1 (Python 3.12.6 on win32)" generated="2026-02-04T18:18:20.935459" rpa="false" schemaversion="5">
+<suite id="s1" name="Atcmd5" source="C:\Users\Ville\robotframe\ex_5\atcmd5.robot">
+<kw name="Suite setup" owner="atcmd_resources" type="SETUP">
+<kw name="Send AT command" owner="atcmd_resources">
+<kw name="Send command">
+<msg time="2026-02-04T18:18:21.006779" level="FAIL">No keyword with name 'Send command' found. Did you mean:
+    atcmd_resources.Send AT command</msg>
+<arg>AT</arg>
+<status status="FAIL" start="2026-02-04T18:18:21.006779" elapsed="0.000000">No keyword with name 'Send command' found. Did you mean:
+    atcmd_resources.Send AT command</status>
+</kw>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<var>${response}</var>
+<arg>Response should be</arg>
+<arg>OK</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="NOT RUN" start="2026-02-04T18:18:21.007736" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="${response}">
+<kw name="Log" owner="BuiltIn">
+<arg>Success</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-02-04T18:18:21.008714" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2026-02-04T18:18:21.008714" elapsed="0.000000"/>
+</branch>
+<branch type="ELSE">
+<kw name="Response should be">
+<arg>OK</arg>
+<status status="NOT RUN" start="2026-02-04T18:18:21.009687" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2026-02-04T18:18:21.009687" elapsed="0.000000"/>
+</branch>
+<status status="NOT RUN" start="2026-02-04T18:18:21.008714" elapsed="0.000973"/>
+</if>
+<status status="FAIL" start="2026-02-04T18:18:21.004810" elapsed="0.005880">No keyword with name 'Send command' found. Did you mean:
+    atcmd_resources.Send AT command</status>
+</kw>
+<kw name="Switch local echo off" owner="atcmd_resources">
+<status status="NOT RUN" start="2026-02-04T18:18:21.010690" elapsed="0.000000"/>
+</kw>
+<kw name="Check echo status" owner="atcmd_resources">
+<arg>OFF</arg>
+<status status="NOT RUN" start="2026-02-04T18:18:21.011647" elapsed="0.000000"/>
+</kw>
+<status status="FAIL" start="2026-02-04T18:18:21.003833" elapsed="0.007814">No keyword with name 'Send command' found. Did you mean:
+    atcmd_resources.Send AT command</status>
+</kw>
+<test id="s1-t1" name="Send text" line="14">
+<status status="FAIL" start="2026-02-04T18:18:21.011647" elapsed="0.000971">Parent suite setup failed:
+No keyword with name 'Send command' found. Did you mean:
+    atcmd_resources.Send AT command</status>
+</test>
+<test id="s1-t2" name="Send Mixed Letters" line="15">
+<status status="FAIL" start="2026-02-04T18:18:21.014570" elapsed="0.000981">Parent suite setup failed:
+No keyword with name 'Send command' found. Did you mean:
+    atcmd_resources.Send AT command</status>
+</test>
+<test id="s1-t3" name="Send Special Characters" line="16">
+<status status="FAIL" start="2026-02-04T18:18:21.017502" elapsed="0.000977">Parent suite setup failed:
+No keyword with name 'Send command' found. Did you mean:
+    atcmd_resources.Send AT command</status>
+</test>
+<kw name="Suite teardown" owner="atcmd_resources" type="TEARDOWN">
+<kw name="Switch local echo on" owner="atcmd_resources">
+<kw name="Send command">
+<msg time="2026-02-04T18:18:21.026289" level="FAIL">No keyword with name 'Send command' found. Did you mean:
+    atcmd_resources.Send AT command</msg>
+<arg>ATE1</arg>
+<status status="FAIL" start="2026-02-04T18:18:21.026289" elapsed="0.000000">No keyword with name 'Send command' found. Did you mean:
+    atcmd_resources.Send AT command</status>
+</kw>
+<kw name="Response should be">
+<msg time="2026-02-04T18:18:21.031171" level="FAIL">No keyword with name 'Response should be' found.</msg>
+<arg>OK</arg>
+<status status="FAIL" start="2026-02-04T18:18:21.031171" elapsed="0.000000">No keyword with name 'Response should be' found.</status>
+</kw>
+<status status="FAIL" start="2026-02-04T18:18:21.022384" elapsed="0.008787">Several failures occurred:
+
+1) No keyword with name 'Send command' found. Did you mean:
+    atcmd_resources.Send AT command
+
+2) No keyword with name 'Response should be' found.</status>
+</kw>
+<kw name="Check echo status" owner="atcmd_resources">
+<kw name="Send command">
+<msg time="2026-02-04T18:18:21.034126" level="FAIL">No keyword with name 'Send command' found. Did you mean:
+    atcmd_resources.Send AT command</msg>
+<arg>ATE</arg>
+<status status="FAIL" start="2026-02-04T18:18:21.033149" elapsed="0.000977">No keyword with name 'Send command' found. Did you mean:
+    atcmd_resources.Send AT command</status>
+</kw>
+<kw name="Response should be">
+<msg time="2026-02-04T18:18:21.036054" level="FAIL">No keyword with name 'Response should be' found.</msg>
+<arg>${expected_status}</arg>
+<status status="FAIL" start="2026-02-04T18:18:21.036054" elapsed="0.000000">No keyword with name 'Response should be' found.</status>
+</kw>
+<arg>ATE</arg>
+<status status="FAIL" start="2026-02-04T18:18:21.032173" elapsed="0.004864">Several failures occurred:
+
+1) No keyword with name 'Send command' found. Did you mean:
+    atcmd_resources.Send AT command
+
+2) No keyword with name 'Response should be' found.</status>
+</kw>
+<kw name="Response should be">
+<msg time="2026-02-04T18:18:21.039959" level="FAIL">No keyword with name 'Response should be' found.</msg>
+<arg>ON</arg>
+<status status="FAIL" start="2026-02-04T18:18:21.039959" elapsed="0.000000">No keyword with name 'Response should be' found.</status>
+</kw>
+<status status="FAIL" start="2026-02-04T18:18:21.021407" elapsed="0.019532">Several failures occurred:
+
+1) No keyword with name 'Send command' found. Did you mean:
+    atcmd_resources.Send AT command
+
+2) No keyword with name 'Response should be' found.
+
+3) No keyword with name 'Send command' found. Did you mean:
+    atcmd_resources.Send AT command
+
+4) No keyword with name 'Response should be' found.
+
+5) No keyword with name 'Response should be' found.</status>
+</kw>
+<status status="FAIL" start="2026-02-04T18:18:20.937448" elapsed="0.103491">Suite setup failed:
+No keyword with name 'Send command' found. Did you mean:
+    atcmd_resources.Send AT command
+
+Also suite teardown failed:
+Several failures occurred:
+
+1) No keyword with name 'Send command' found. Did you mean:
+    atcmd_resources.Send AT command
+
+2) No keyword with name 'Response should be' found.
+
+3) No keyword with name 'Send command' found. Did you mean:
+    atcmd_resources.Send AT command
+
+4) No keyword with name 'Response should be' found.
+
+5) No keyword with name 'Response should be' found.</status>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="3" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="0" fail="3" skip="0" id="s1" name="Atcmd5">Atcmd5</stat>
+</suite>
+</statistics>
+<errors>
+<msg time="2026-02-04T18:18:20.991155" level="ERROR">Error in file 'C:\Users\Ville\robotframe\ex_5\atcmd5.robot' on line 10: Setting variable '${COM_PORT}' failed: Resolving variable '${ENV:COM_PORT}' failed: Variable '${ENV}' not found.</msg>
+<msg time="2026-02-04T18:18:20.992114" level="ERROR">Error in file 'C:\Users\Ville\robotframe\ex_5\atcmd5.robot' on line 2: Variable '${COM_PORT}' not found.</msg>
+<msg time="2026-02-04T18:18:20.998947" level="ERROR">Error in file 'C:\Users\Ville\robotframe\ex_5\atcmd_resources.resource' on line 3: Setting variable '${COM_PORT}' failed: Resolving variable '${ENV:COM_PORT}' failed: Variable '${ENV}' not found.</msg>
+<msg time="2026-02-04T18:18:21.000920" level="ERROR">Error in file 'C:\Users\Ville\robotframe\ex_5\atcmd_resources.resource' on line 6: Variable '${COM_PORT}' not found.</msg>
+</errors>
+</robot>

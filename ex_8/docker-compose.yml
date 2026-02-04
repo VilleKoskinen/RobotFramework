@@ -1,0 +1,12 @@
+# You can detach from the containers by starting them with 'docker-compose up --detach'
+
+version: "3.9"
+services:
+    car_dealer:
+        build:
+            context: ./install
+        ports:
+        - "3000:3000"
+
+
+        

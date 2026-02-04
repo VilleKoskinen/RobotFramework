@@ -1,0 +1,83 @@
+html {
+	font-family: sans-serif;
+}
+
+body {
+	margin: 0;
+}
+
+a {
+	text-decoration: none;
+}
+
+
+header {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+	align-items: center;
+	background-color: #525252;
+	padding: 0 1em;
+	margin-bottom: 1em;
+	color: white;
+	box-shadow: 0 0 1em #0001;
+}
+
+header a {
+	margin: 0 .5ch;
+	color: inherit;
+}
+
+#car-container {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-around;
+}
+
+.car {
+	width: 130px;
+	color: white;
+	margin: 2ch;
+	padding: 3ch;
+	border-radius: 2ch;
+	box-shadow: 0 .2em .5em #0003;
+}
+
+.car-specs {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+}
+
+.field-name {
+	color: #e8e8e8;
+}
+
+.field-value {
+	font-weight: bold;
+}
+
+#add-form {
+	width: 300px;
+	margin: 3em auto;
+	display: flex;
+	flex-flow: column;
+}
+
+label {
+	font-weight: bold;
+}
+
+input {
+	font-size: 1.2em;
+	padding: .5em;
+	margin: .5em 0;
+	border-color: transparent;
+	border-bottom: 1px solid black;
+	transition: background-color .2s ease-in-out;
+}
+
+input[type='submit'], input[type='button'] {
+	background-color: white;
+	cursor: pointer;
+}

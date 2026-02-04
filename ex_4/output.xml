@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.1.1 (Python 3.12.6 on win32)" generated="2024-11-14T11:42:20.788398" rpa="false" schemaversion="5">
+<suite id="s1" name="Atcmd" source="C:\Users\Ville\robotframe\ex_4\atcmd.robot">
+<kw name="Suite setup" owner="atcmd_resources" type="SETUP">
+<kw name="Send AT command" owner="atcmd_resources">
+<kw name="Send Command" owner="AtCommandLibrary">
+<arg>AT</arg>
+<status status="PASS" start="2024-11-14T11:42:20.941062" elapsed="0.001001"/>
+</kw>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Response Should Be" owner="AtCommandLibrary">
+<msg time="2024-11-14T11:42:20.944024" level="FAIL">Expected: OK got: AT</msg>
+<arg>OK</arg>
+<status status="FAIL" start="2024-11-14T11:42:20.943026" elapsed="0.004998">Expected: OK got: AT</status>
+</kw>
+<msg time="2024-11-14T11:42:20.948024" level="INFO">${response} = False</msg>
+<var>${response}</var>
+<arg>Response should be</arg>
+<arg>OK</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2024-11-14T11:42:20.943026" elapsed="0.006002"/>
+</kw>
+<if>
+<branch type="IF" condition="${response}">
+<kw name="Log" owner="BuiltIn">
+<arg>Success</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2024-11-14T11:42:20.950027" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2024-11-14T11:42:20.949028" elapsed="0.000999"/>
+</branch>
+<branch type="ELSE">
+<kw name="Response Should Be" owner="AtCommandLibrary">
+<arg>OK</arg>
+<status status="PASS" start="2024-11-14T11:42:20.951044" elapsed="0.000996"/>
+</kw>
+<status status="PASS" start="2024-11-14T11:42:20.951044" elapsed="0.000996"/>
+</branch>
+<status status="PASS" start="2024-11-14T11:42:20.949028" elapsed="0.003012"/>
+</if>
+<status status="PASS" start="2024-11-14T11:42:20.940038" elapsed="0.012990"/>
+</kw>
+<kw name="Switch local echo off" owner="atcmd_resources">
+<kw name="Send Command" owner="AtCommandLibrary">
+<arg>ATE0</arg>
+<status status="PASS" start="2024-11-14T11:42:20.955042" elapsed="0.000000"/>
+</kw>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Response Should Be" owner="AtCommandLibrary">
+<msg time="2024-11-14T11:42:20.958024" level="FAIL">Expected: OK got: ATE0</msg>
+<arg>OK</arg>
+<status status="FAIL" start="2024-11-14T11:42:20.957027" elapsed="0.001999">Expected: OK got: ATE0</status>
+</kw>
+<msg time="2024-11-14T11:42:20.960026" level="INFO">${response} = False</msg>
+<var>${response}</var>
+<arg>Response should be</arg>
+<arg>OK</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2024-11-14T11:42:20.956024" elapsed="0.004002"/>
+</kw>
+<if>
+<branch type="IF" condition="${response}">
+<kw name="Log" owner="BuiltIn">
+<arg>Success</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2024-11-14T11:42:20.961025" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2024-11-14T11:42:20.960026" elapsed="0.000999"/>
+</branch>
+<branch type="ELSE">
+<kw name="Response Should Be" owner="AtCommandLibrary">
+<arg>OK</arg>
+<status status="PASS" start="2024-11-14T11:42:20.961025" elapsed="0.001002"/>
+</kw>
+<status status="PASS" start="2024-11-14T11:42:20.961025" elapsed="0.002000"/>
+</branch>
+<status status="PASS" start="2024-11-14T11:42:20.960026" elapsed="0.002999"/>
+</if>
+<status status="PASS" start="2024-11-14T11:42:20.954038" elapsed="0.008987"/>
+</kw>
+<kw name="Check echo status" owner="atcmd_resources">
+<kw name="Send Command" owner="AtCommandLibrary">
+<arg>ATE</arg>
+<status status="PASS" start="2024-11-14T11:42:20.965039" elapsed="0.000999"/>
+</kw>
+<kw name="Response Should Be" owner="AtCommandLibrary">
+<arg>${expected_status}</arg>
+<status status="PASS" start="2024-11-14T11:42:20.967027" elapsed="0.003003"/>
+</kw>
+<arg>OFF</arg>
+<status status="PASS" start="2024-11-14T11:42:20.964025" elapsed="0.007005"/>
+</kw>
+<status status="PASS" start="2024-11-14T11:42:20.939039" elapsed="0.031991"/>
+</kw>
+<test id="s1-t1" name="Send Special Characters, number and letter" line="16">
+<kw name="Verify Send Text Response" owner="atcmd_resources">
+<kw name="Send Text" owner="AtCommandLibrary">
+<arg>${command}</arg>
+<status status="PASS" start="2024-11-14T11:42:20.977032" elapsed="0.001996"/>
+</kw>
+<kw name="Response Should Be" owner="AtCommandLibrary">
+<arg>SENT="${Response}"</arg>
+<status status="PASS" start="2024-11-14T11:42:20.980032" elapsed="0.007817"/>
+</kw>
+<kw name="Response Should Be" owner="AtCommandLibrary">
+<arg>OK</arg>
+<status status="PASS" start="2024-11-14T11:42:20.990920" elapsed="0.001935"/>
+</kw>
+<arg>hello5588, world00!</arg>
+<arg>HELLO5588X WORLD00X</arg>
+<status status="PASS" start="2024-11-14T11:42:20.975027" elapsed="0.018643"/>
+</kw>
+<tag>mixed</tag>
+<status status="PASS" start="2024-11-14T11:42:20.972036" elapsed="0.024842"/>
+</test>
+<test id="s1-t2" name="Send text only" line="8">
+<kw name="Verify Send Text Response" owner="atcmd_resources">
+<kw name="Send Text" owner="AtCommandLibrary">
+<arg>${command}</arg>
+<status status="PASS" start="2024-11-14T11:42:21.003063" elapsed="0.001001"/>
+</kw>
+<kw name="Response Should Be" owner="AtCommandLibrary">
+<arg>SENT="${Response}"</arg>
+<status status="PASS" start="2024-11-14T11:42:21.004064" elapsed="0.003008"/>
+</kw>
+<kw name="Response Should Be" owner="AtCommandLibrary">
+<arg>OK</arg>
+<status status="PASS" start="2024-11-14T11:42:21.008067" elapsed="0.000996"/>
+</kw>
+<arg>hello world</arg>
+<arg>HELLO WORLD</arg>
+<status status="PASS" start="2024-11-14T11:42:21.002063" elapsed="0.008047"/>
+</kw>
+<tag>text_only</tag>
+<status status="PASS" start="2024-11-14T11:42:21.000074" elapsed="0.014011"/>
+</test>
+<test id="s1-t3" name="Send number only" line="12">
+<kw name="Verify Send Text Response" owner="atcmd_resources">
+<kw name="Send Text" owner="AtCommandLibrary">
+<arg>${command}</arg>
+<status status="PASS" start="2024-11-14T11:42:21.020066" elapsed="0.000999"/>
+</kw>
+<kw name="Response Should Be" owner="AtCommandLibrary">
+<arg>SENT="${Response}"</arg>
+<status status="PASS" start="2024-11-14T11:42:21.021065" elapsed="0.001997"/>
+</kw>
+<kw name="Response Should Be" owner="AtCommandLibrary">
+<arg>OK</arg>
+<status status="PASS" start="2024-11-14T11:42:21.023062" elapsed="0.001001"/>
+</kw>
+<arg>1234567890</arg>
+<arg>1234567890</arg>
+<status status="PASS" start="2024-11-14T11:42:21.019067" elapsed="0.004996"/>
+</kw>
+<tag>number_only</tag>
+<status status="PASS" start="2024-11-14T11:42:21.017068" elapsed="0.008000"/>
+</test>
+<kw name="Suite teardown" owner="atcmd_resources" type="TEARDOWN">
+<kw name="Switch local echo on" owner="atcmd_resources">
+<kw name="Send Command" owner="AtCommandLibrary">
+<arg>ATE1</arg>
+<status status="PASS" start="2024-11-14T11:42:21.035059" elapsed="0.000998"/>
+</kw>
+<kw name="Response Should Be" owner="AtCommandLibrary">
+<arg>OK</arg>
+<status status="PASS" start="2024-11-14T11:42:21.036057" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2024-11-14T11:42:21.035059" elapsed="0.000998"/>
+</kw>
+<kw name="Check echo status" owner="atcmd_resources">
+<kw name="Send Command" owner="AtCommandLibrary">
+<arg>ATE</arg>
+<status status="PASS" start="2024-11-14T11:42:21.037059" elapsed="0.000000"/>
+</kw>
+<kw name="Response Should Be" owner="AtCommandLibrary">
+<arg>${expected_status}</arg>
+<status status="PASS" start="2024-11-14T11:42:21.037059" elapsed="0.000000"/>
+</kw>
+<arg>ATE</arg>
+<status status="PASS" start="2024-11-14T11:42:21.036057" elapsed="0.001002"/>
+</kw>
+<kw name="Response Should Be" owner="AtCommandLibrary">
+<arg>ON</arg>
+<status status="PASS" start="2024-11-14T11:42:21.038060" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2024-11-14T11:42:21.035059" elapsed="0.003001"/>
+</kw>
+<meta name="Randomized">Suites and tests (seed 541703204581214371)</meta>
+<status status="PASS" start="2024-11-14T11:42:20.795367" elapsed="0.242693"/>
+</suite>
+<statistics>
+<total>
+<stat pass="3" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0" skip="0">mixed</stat>
+<stat pass="1" fail="0" skip="0">number_only</stat>
+<stat pass="1" fail="0" skip="0">text_only</stat>
+</tag>
+<suite>
+<stat pass="3" fail="0" skip="0" id="s1" name="Atcmd">Atcmd</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

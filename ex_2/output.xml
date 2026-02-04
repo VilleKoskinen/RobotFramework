@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.1.1 (Python 3.12.6 on win32)" generated="2026-02-04T19:06:42.265725" rpa="false" schemaversion="5">
+<suite id="s1" name="Atcmd" source="C:\Users\Ville\Desktop\RobotFramework\ex_2\atcmd.robot">
+<test id="s1-t1" name="Connection Test" line="7">
+<kw name="Send Text Template">
+<kw name="Send text">
+<msg time="2026-02-04T19:06:42.334802" level="FAIL">No keyword with name 'Send text' found.</msg>
+<arg>${text}</arg>
+<status status="FAIL" start="2026-02-04T19:06:42.334802" elapsed="0.000000">No keyword with name 'Send text' found.</status>
+</kw>
+<kw name="Response should be">
+<arg>SENT="${expected_response}"</arg>
+<status status="NOT RUN" start="2026-02-04T19:06:42.334802" elapsed="0.000000"/>
+</kw>
+<arg>AT</arg>
+<arg>AT</arg>
+<status status="FAIL" start="2026-02-04T19:06:42.334802" elapsed="0.000000">No keyword with name 'Send text' found.</status>
+</kw>
+<status status="FAIL" start="2026-02-04T19:06:42.334802" elapsed="0.000000">No keyword with name 'Send text' found.</status>
+</test>
+<test id="s1-t2" name="Only Letters" line="8">
+<kw name="Send Text Template">
+<kw name="Send text">
+<msg time="2026-02-04T19:06:42.334802" level="FAIL">No keyword with name 'Send text' found.</msg>
+<arg>${text}</arg>
+<status status="FAIL" start="2026-02-04T19:06:42.334802" elapsed="0.000000">No keyword with name 'Send text' found.</status>
+</kw>
+<kw name="Response should be">
+<arg>SENT="${expected_response}"</arg>
+<status status="NOT RUN" start="2026-02-04T19:06:42.334802" elapsed="0.000000"/>
+</kw>
+<arg>this is a test</arg>
+<arg>THIS IS A TEST</arg>
+<status status="FAIL" start="2026-02-04T19:06:42.334802" elapsed="0.000000">No keyword with name 'Send text' found.</status>
+</kw>
+<status status="FAIL" start="2026-02-04T19:06:42.334802" elapsed="0.000000">No keyword with name 'Send text' found.</status>
+</test>
+<test id="s1-t3" name="Only Numbers" line="9">
+<kw name="Send Text Template">
+<kw name="Send text">
+<msg time="2026-02-04T19:06:42.334802" level="FAIL">No keyword with name 'Send text' found.</msg>
+<arg>${text}</arg>
+<status status="FAIL" start="2026-02-04T19:06:42.334802" elapsed="0.000000">No keyword with name 'Send text' found.</status>
+</kw>
+<kw name="Response should be">
+<arg>SENT="${expected_response}"</arg>
+<status status="NOT RUN" start="2026-02-04T19:06:42.334802" elapsed="0.000000"/>
+</kw>
+<arg>1234567890</arg>
+<arg>1234567890</arg>
+<status status="FAIL" start="2026-02-04T19:06:42.334802" elapsed="0.000000">No keyword with name 'Send text' found.</status>
+</kw>
+<status status="FAIL" start="2026-02-04T19:06:42.334802" elapsed="0.000000">No keyword with name 'Send text' found.</status>
+</test>
+<test id="s1-t4" name="Mixed Letters and Numbers" line="10">
+<kw name="Send Text Template">
+<kw name="Send text">
+<msg time="2026-02-04T19:06:42.351701" level="FAIL">No keyword with name 'Send text' found.</msg>
+<arg>${text}</arg>
+<status status="FAIL" start="2026-02-04T19:06:42.351701" elapsed="0.000000">No keyword with name 'Send text' found.</status>
+</kw>
+<kw name="Response should be">
+<arg>SENT="${expected_response}"</arg>
+<status status="NOT RUN" start="2026-02-04T19:06:42.351701" elapsed="0.000000"/>
+</kw>
+<arg>test123test</arg>
+<arg>TEST123TEST</arg>
+<status status="FAIL" start="2026-02-04T19:06:42.350704" elapsed="0.000997">No keyword with name 'Send text' found.</status>
+</kw>
+<status status="FAIL" start="2026-02-04T19:06:42.348701" elapsed="0.003999">No keyword with name 'Send text' found.</status>
+</test>
+<test id="s1-t5" name="Whitespace and Tabs" line="11">
+<kw name="Send Text Template">
+<kw name="Send text">
+<msg time="2026-02-04T19:06:42.361700" level="FAIL">No keyword with name 'Send text' found.</msg>
+<arg>${text}</arg>
+<status status="FAIL" start="2026-02-04T19:06:42.361700" elapsed="0.000000">No keyword with name 'Send text' found.</status>
+</kw>
+<kw name="Response should be">
+<arg>SENT="${expected_response}"</arg>
+<status status="NOT RUN" start="2026-02-04T19:06:42.362701" elapsed="0.000000"/>
+</kw>
+<arg>this${SPACE}is${SPACE}a${SPACE}test</arg>
+<arg>THIS IS A TEST</arg>
+<status status="FAIL" start="2026-02-04T19:06:42.359700" elapsed="0.003001">No keyword with name 'Send text' found.</status>
+</kw>
+<status status="FAIL" start="2026-02-04T19:06:42.354702" elapsed="0.007999">No keyword with name 'Send text' found.</status>
+</test>
+<test id="s1-t6" name="Special Characters" line="12">
+<kw name="Send Text Template">
+<kw name="Send text">
+<msg time="2026-02-04T19:06:42.369701" level="FAIL">No keyword with name 'Send text' found.</msg>
+<arg>${text}</arg>
+<status status="FAIL" start="2026-02-04T19:06:42.369701" elapsed="0.000000">No keyword with name 'Send text' found.</status>
+</kw>
+<kw name="Response should be">
+<arg>SENT="${expected_response}"</arg>
+<status status="NOT RUN" start="2026-02-04T19:06:42.369701" elapsed="0.000000"/>
+</kw>
+<arg>hello, world!</arg>
+<arg>HELLOX WORLDX</arg>
+<status status="FAIL" start="2026-02-04T19:06:42.366702" elapsed="0.002999">No keyword with name 'Send text' found.</status>
+</kw>
+<status status="FAIL" start="2026-02-04T19:06:42.366702" elapsed="0.003999">No keyword with name 'Send text' found.</status>
+</test>
+<doc>Data-driven tests for AT command communication with Raspberry Pi Pico</doc>
+<status status="FAIL" start="2026-02-04T19:06:42.265725" elapsed="0.125881"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="6" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="0" fail="6" skip="0" id="s1" name="Atcmd">Atcmd</stat>
+</suite>
+</statistics>
+<errors>
+<msg time="2026-02-04T19:06:42.319293" level="ERROR">Error in file 'C:\Users\Ville\Desktop\RobotFramework\ex_2\atcmd.robot' on line 3: Initializing library 'AtCommandLibrary' with no arguments failed: SerialException: could not open port '/dev/cu.usbmodem1101': FileNotFoundError(2, 'The system cannot find the path specified.', None, 3)
+Traceback (most recent call last):
+  File "C:\Users\Ville\Desktop\RobotFramework\ex_2\AtCommandLibrary.py", line 9, in __init__
+    self._port = serial.Serial('/dev/cu.usbmodem1101', 115200, timeout = 1)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ville\Lib\site-packages\serial\serialwin32.py", line 33, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Users\Ville\Lib\site-packages\serial\serialutil.py", line 244, in __init__
+    self.open()
+  File "C:\Users\Ville\Lib\site-packages\serial\serialwin32.py", line 64, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+serial.serialutil.SerialException: could not open port '/dev/cu.usbmodem1101': FileNotFoundError(2, 'The system cannot find the path specified.', None, 3)</msg>
+</errors>
+</robot>
