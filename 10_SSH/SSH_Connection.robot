@@ -9,9 +9,9 @@ Library    SSHLibrary
 *** Variables ***
 ${SSH_HOST}         shell.metropolia.fi
 ${SSH_USER}         aleksame
-${SSH_KEY_PATH}     /Users/amerilain/.ssh/aleksame-459.pem
+${SSH_KEY_PATH}     /Users/vilkosk/.ssh/aleksame-459.pem
 ${ADDRESS_FILE}     address.txt
-${REMOTE_PATH}      /home2-3/a/aleksame/
+${REMOTE_PATH}      /home2-3/a/vilkosk/
 
 *** Keywords ***
 Establish SSH Connection
