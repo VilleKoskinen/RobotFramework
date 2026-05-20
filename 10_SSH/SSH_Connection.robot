@@ -9,7 +9,7 @@ Library    SSHLibrary
 *** Variables ***
 ${SSH_HOST}         shell.metropolia.fi
 ${SSH_USER}         vilkosk
-${SSH_KEY_PATH}     /Users/vilkosk/.ssh/
+${SSH_KEY_PATH}     /Users/vilkosk/.ssh/vilkosk-456.pem
 ${ADDRESS_FILE}     address.txt
 ${REMOTE_PATH}      /home2-3/a/vilkosk/
 
