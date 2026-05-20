@@ -1,3 +1,4 @@
-# Robot Framework Labs
+# Robot Framework Learning & Exercises
 
-Robot Framework practice exercises focusing on web UI testing with SeleniumLibrary and basic test automation patterns.
+This repository contains a structured collection of exercises and examples designed to master **Robot Framework** for test automation. Each folder represents a specific topic, moving from basic syntax to advanced integrations like Selenium and SSH
+
