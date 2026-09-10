@@ -7,16 +7,19 @@ The local workflow is the first milestone. No Jenkins server is installed here.
 
 ## Git Bash (from repository root)
 
+The SDK example assumes `$HOME/pico-sdk`; adjust for your installation.
+`cygpath` converts the current user’s path for Windows CMake.
+
 ```bash
-export PICO_SDK_PATH='C:/Users/Ville/pico-sdk'
-export COM_PORT=COM6
+export PICO_SDK_PATH="$(cygpath -m "$HOME/pico-sdk")"
+export COM_PORT=COM6  # Replace with your target USB serial port
 bash 05_Jenkins_flat/run.sh
 ```
 
 This builds the Pico W AT application, replaces the target firmware over SWD,
 verifies flash, resets the target, then executes three serial tests. Connect both
 the Debug Probe and target USB; connect probe D to addon SWD and close serial
-terminals. COM6 is the previously verified target; COM5 belongs to the probe UART.
+terminals. COM6 is an example; select your target USB serial port, not the probe UART.
 
 Prerequisites on PATH: cmake, ninja, arm-none-eabi-gcc, openocd, robot. Tested SDK
 2.1.0 and ARM GCC 13.3.1; active Robot 7.1.1/Python 3.12.6. No `.venv` is required.
@@ -48,7 +51,7 @@ Direct test command (repository root):
 robot --variable COM_PORT:COM6 --outputdir results/05 05_Jenkins_flat/atcmd5.robot
 ```
 
-Port priority: CLI variable, environment COM_PORT, COM6 convenience fallback.
+Port priority: CLI variable, environment COM_PORT, COM6 fallback (override for your machine).
 From this folder, `robot atcmd5.robot` works. No duplicate library import or invalid
 `${ENV:COM_PORT}` expression remains.
 
@@ -64,8 +67,8 @@ Set agent environment variables:
 
 - `GIT_BASH`: absolute executable path, e.g. `C:\Program Files\Git\bin\bash.exe`.
   This avoids accidentally invoking Windows' WSL `bash.exe`.
-- `PICO_SDK_PATH`: installed SDK location, e.g. `C:/Users/Ville/pico-sdk`.
-- `COM_PORT`: actual target port (currently COM6).
+- `PICO_SDK_PATH`: installed SDK location, e.g. the absolute path to your installed SDK.
+- `COM_PORT`: actual target USB serial port.
 - PATH: working Robot, OpenOCD, CMake, Ninja and ARM GCC for the agent account.
 
 The pipeline checks out the repo through Jenkins' standard SCM checkout and runs

@@ -11,13 +11,16 @@ This is the echo-control variant for exercises 3–6, not the basic exercise 2
 image or the unfinished Ceedling exercise 9 firmware. Echo starts ON.
 It is not claimed to be binary-identical to the supplied UF2 images.
 
+The SDK example below assumes an installation at `$HOME/pico-sdk`; adjust it
+if your SDK is installed elsewhere. `cygpath` converts the path for Windows CMake.
+
 ## Build in Git Bash
 
 From the repository root, with the installed Pico SDK 2.1.0, ARM GCC 13.3.1,
 CMake and Ninja on PATH:
 
 ```bash
-export PICO_SDK_PATH='C:/Users/Ville/pico-sdk'
+export PICO_SDK_PATH="$(cygpath -m "$HOME/pico-sdk")"
 cmake -S firmware/atcmd -B firmware/atcmd/build -G Ninja \
   -DCMAKE_BUILD_TYPE=Debug -DPICO_BOARD=pico_w -DPICO_NO_PICOTOOL=1
 cmake --build firmware/atcmd/build --parallel 4
@@ -51,7 +54,7 @@ check prevents the earlier missing-file mistake. No BOOTSEL is needed.
 ./.venv/Scripts/python.exe -m serial.tools.list_ports -v
 ```
 
-The probe was enumerated as COM5 (VID:PID 2E8A:000C); use the separate target port.
+The probe UART uses VID:PID 2E8A:000C; use the separate target USB serial port.
 The exact target COM number is not yet known. Select it in a serial terminal at
 115200 baud, disable terminal local echo, and send commands with LF endings.
 
