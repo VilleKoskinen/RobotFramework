@@ -53,15 +53,14 @@ Use the same Robot installation that passed your local hardware tests.
 
 ## 3. Create the agent in Jenkins
 
-Manage Jenkins → Nodes → New Node:
+Manage Jenkins â†’ Nodes â†’ New Node:
 
 - Name and label: `pico-w-windows`.
 - Type: permanent agent; executors: **1**.
 - Remote root: a dedicated agent directory under your Windows user profile; enter its absolute Windows path.
 - Usage: only build jobs with matching label expressions.
 - Launch: connect agent to controller; enable **WebSocket**.
-- Node environment: `GIT_BASH=C:\Program Files\Git\bin\bash.exe`,
-  `PICO_SDK_PATH` set to your SDK�s absolute Windows path, and `COM_PORT` set to your target�s serial port.
+- Node environment: `PICO_SDK_PATH` set to your SDK installation's absolute Windows path, and `COM_PORT` set to your target's serial port.
 
 Use the Windows/Git Bash connection instructions shown by that node's page to
 download agent.jar and connect with its actual secret. Do not copy a made-up
@@ -86,7 +85,7 @@ Create a Pipeline job with Pipeline script from SCM, Git:
 
 Keep Pico target USB and Debug Probe connected, close serial terminals and avoid
 other jobs/manual tests using the same hardware. Build Now will replace the target
-application. Verify Build → Program Pico W → Robot tests succeed, OpenOCD reports
+application. Verify Build â†’ Program Pico W â†’ Robot tests succeed, OpenOCD reports
 Verified OK, Robot reports 3 passed, and XML/HTML reports appear in artifacts.
 
 The pipeline disables concurrent builds of this job; the single-executor agent
