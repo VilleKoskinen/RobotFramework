@@ -1,0 +1,21 @@
+// Reconstructed pipeline. Configure a dedicated Windows hardware agent first.
+pipeline {
+    agent { label 'pico-w-windows' }
+    options { disableConcurrentBuilds() }
+    stages {
+        stage('Build') {
+            steps { bat '"%GIT_BASH%" 05_Jenkins_flat/run.sh build' }
+        }
+        stage('Program Pico W') {
+            steps { bat '"%GIT_BASH%" 05_Jenkins_flat/run.sh flash' }
+        }
+        stage('Robot tests') {
+            steps { bat '"%GIT_BASH%" 05_Jenkins_flat/run.sh test' }
+            post {
+                always {
+                    archiveArtifacts artifacts: 'results/05/**', allowEmptyArchive: true
+                }
+            }
+        }
+    }
+}

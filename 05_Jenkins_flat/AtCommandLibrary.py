@@ -1,12 +1,22 @@
+import time
 import serial
 
 class AtCommandLibrary(object):
     ''' Library for interacting with a simple device using AT commands
     '''
-    ROBOT_LIBRARY_SCOPE = 'GLOBAL'
+    ROBOT_LIBRARY_SCOPE = 'SUITE'
     
     def __init__(self, com_port):
-        self._port = serial.Serial(com_port, 115200, timeout=1)
+        # USB serial can briefly disappear after flashing/reset.
+        deadline = time.monotonic() + 10
+        while True:
+            try:
+                self._port = serial.Serial(com_port, 115200, timeout=1)
+                break
+            except serial.SerialException:
+                if time.monotonic() >= deadline:
+                    raise
+                time.sleep(0.2)
 
     def send_text(self, text):
         self._port.reset_input_buffer()
@@ -20,3 +30,14 @@ class AtCommandLibrary(object):
         text = self._port.readline().strip().decode('iso-8859-1')
         if text != expected_text:
             raise AssertionError('Expected: ' + expected_text + ' got: ' + text)
+
+    def response_should_be_with_optional_echo(self, expected_text, command):
+        """Allow one exact command echo; never discard arbitrary responses."""
+        text = self._port.readline().strip().decode('iso-8859-1')
+        if text == command:
+            text = self._port.readline().strip().decode('iso-8859-1')
+        if text != expected_text:
+            raise AssertionError('Expected: ' + expected_text + ' got: ' + text)
+
+    def close_port(self):
+        self._port.close()

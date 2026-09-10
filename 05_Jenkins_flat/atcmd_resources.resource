@@ -1,50 +1,34 @@
-
 *** Variables ***
-${COM_PORT}        ${ENV:COM_PORT}
+${COM_PORT}    %{COM_PORT=COM6}
 
 *** Settings ***
 Library    AtCommandLibrary.py    ${COM_PORT}
 
-***Keywords***
+*** Keywords ***
 Suite setup
-    Send AT command
-    Switch local echo off
-    Check echo status       OFF
+    Send command    AT
+    Response should be with optional echo    OK    AT
+    Send command    ATE0
+    Response should be with optional echo    OK    ATE0
+    Check echo status    OFF
 
 Suite teardown
-    Switch local echo on
-    Check echo status       ATE
-    Response should be      ON
-
-Verify Send Text Response
-    [Arguments]    ${command}    ${Response}
-    Send text    ${command}
-    Response should be    SENT="${Response}"
-    Response should be    OK
-
-Send AT command
-    Send command            AT
-    ${response} =    Run Keyword And Return Status    Response should be      OK
-    IF  ${response} 
-        Log    Success
-    ELSE
-        Response should be      OK
+    TRY
+        Send command    ATE1
+        Response should be with optional echo    OK    ATE1
+        Check echo status    ON
+    FINALLY
+        Close port
     END
-
-Switch local echo off
-    Send command            ATE0
-    ${response} =    Run Keyword And Return Status    Response should be      OK
-    IF  ${response} 
-        Log    Success
-    ELSE
-        Response should be      OK
-    END
-
-Switch local echo on
-    Send command            ATE1
-    Response should be      OK
 
 Check echo status
-    [Arguments]         ${expected_status}
-    Send command            ATE
-    Response should be      ${expected_status}
+    [Arguments]    ${expected_status}
+    Send command    ATE
+    Response should be with optional echo    ${expected_status}    ATE
+    Response should be    OK
+
+Verify Send Text Response
+    [Arguments]    ${text}    ${expected_response}
+    Send text    ${text}
+    Response should be    SENT="${expected_response}"
+    Response should be    OK
