@@ -4,3 +4,7 @@
 report.*
 log.*
 output.*
+
+# Local Jenkins connection material (never commit).
+/agent.jar
+/secret-file

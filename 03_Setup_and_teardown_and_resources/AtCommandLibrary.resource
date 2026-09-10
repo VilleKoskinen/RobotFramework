@@ -1,30 +1,31 @@
-
 *** Settings ***
-Library             AtCommandLibrary.py         ${COM_PORT}
+Library    AtCommandLibrary.py    ${COM_PORT}
 
-***Keywords***
+*** Keywords ***
 Suite setup
-    Send command            AT
-    Response should be      AT
-    Response should be      OK
-    Send command            ATE0
-    Response should be      ATE0
-    Response should be      OK
-    Check echo status       OFF
+    Send command    AT
+    Response should be with optional echo    OK    AT
+    Send command    ATE0
+    Response should be with optional echo    OK    ATE0
+    Check echo status    OFF
 
 Suite teardown
-    Send command            ATE1
-    Response should be      OK
-    Check echo status       ATE
-    Response should be      ON
-
-Send text to Pico
-	[Arguments]		        ${command}		${response}
-	Send text  				${command}
-	Response should be		SENT="${response}"
-	Response should be		OK
+    TRY
+        Send command    ATE1
+        Response should be with optional echo    OK    ATE1
+        Check echo status    ON
+    FINALLY
+        Close port
+    END
 
 Check echo status
-    [Arguments]         ${expected_status}
-    Send command            ATE
-    Response should be      ${expected_status}
+    [Arguments]    ${expected_status}
+    Send command    ATE
+    Response should be with optional echo    ${expected_status}    ATE
+    Response should be    OK
+
+Send text to Pico
+    [Arguments]    ${text}    ${expected_response}
+    Send text    ${text}
+    Response should be    SENT="${expected_response}"
+    Response should be    OK

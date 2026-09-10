@@ -1,15 +1,12 @@
 *** Settings ***
-Documentation     Example of morse transmitter test
-...
-...               Change this example to use data driven style 
-...               Test with different texts and speeds
+Documentation     USB AT-command tests with echo setup, teardown and reusable resources
 Suite Setup			Suite setup
 Suite Teardown		Suite teardown
 Test Template		Send text to Pico
 Resource			AtCommandLibrary.resource
 
 *** Variables ***
-${COM_PORT}         /dev/tty.usbmodem1101
+${COM_PORT}         %{COM_PORT=COM6}
 
 *** Test Cases ***              Input               Expected Response
 Connection Test                 AT                  AT

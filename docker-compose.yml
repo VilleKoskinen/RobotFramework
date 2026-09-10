@@ -1,0 +1,13 @@
+services:
+  pico:
+    build:
+      context: .
+    volumes:
+      - .:/workspace
+    command:
+      - /bin/sh
+      - -ec
+      - >-
+        cmake -S firmware/atcmd -B firmware/atcmd/build-docker -G Ninja
+        -DPICO_BOARD=pico_w -DCMAKE_BUILD_TYPE=Debug -DPICO_NO_PICOTOOL=1
+        && cmake --build firmware/atcmd/build-docker --parallel 4

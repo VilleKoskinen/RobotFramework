@@ -1,0 +1,3 @@
+# Build tool image needs only the Dockerfile; sources are mounted at run time.
+**
+!Dockerfile

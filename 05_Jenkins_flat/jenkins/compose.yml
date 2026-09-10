@@ -1,4 +1,4 @@
-# Reconstructed controller-only setup. Hardware tools run on a Windows agent.
+# Course services; the Windows agent invokes the separate Pico build container.
 name: robotframework-ex05
 services:
   jenkins:
@@ -8,5 +8,17 @@ services:
     volumes:
       - jenkins_home:/var/jenkins_home
     restart: unless-stopped
+  gogs:
+    build:
+      context: .
+    ports:
+      - "127.0.0.1:3000:3000"
+      - "127.0.0.1:10022:10022"
+    volumes:
+      - gogs_data:/data
+      - gogs_backup:/backup
+    restart: unless-stopped
 volumes:
   jenkins_home:
+  gogs_data:
+  gogs_backup:

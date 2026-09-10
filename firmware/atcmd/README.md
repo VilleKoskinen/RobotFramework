@@ -7,14 +7,21 @@ CMake is simplified to select Pico W before SDK import, link `pico_stdlib`,
 and enable USB stdio with UART stdio disabled. No addon LEDs, motors, buttons,
 Wi-Fi or display are driven. The course parser and its limitations remain.
 
-This is the echo-control variant for exercises 3–6, not the basic exercise 2
+This is the echo-control variant for exercises 3â€“6, not the basic exercise 2
 image or the unfinished Ceedling exercise 9 firmware. Echo starts ON.
 It is not claimed to be binary-identical to the supplied UF2 images.
 
 The SDK example below assumes an installation at `$HOME/pico-sdk`; adjust it
 if your SDK is installed elsewhere. `cygpath` converts the path for Windows CMake.
 
-## Build in Git Bash
+## Course exercise 5 build
+
+The Jenkins pipeline now uses the root Dockerfile and docker-compose.yml to build
+into `firmware/atcmd/build-docker`. See `../../05_Jenkins_flat/README.md` for the
+container build, flash and full exercise 3 test commands. The native build below
+is an optional local alternative; it is not the PDF-aligned Jenkins build stage.
+
+## Optional native build in Git Bash
 
 From the repository root, with the installed Pico SDK 2.1.0, ARM GCC 13.3.1,
 CMake and Ninja on PATH:

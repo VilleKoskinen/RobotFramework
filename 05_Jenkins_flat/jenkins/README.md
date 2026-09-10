@@ -1,98 +1,89 @@
-# Jenkins controller and Windows hardware agent
+# Course Jenkins, Gogs and Windows agent
 
-Reconstructed exercise 5 setup. The original archive supplies Jenkins and Gogs
-containers; this first step uses the existing GitHub repository and a controller
-container. Gogs/hook work belongs to the later exercise 6 setup. No Docker socket
-or target USB passthrough is needed: build, flash and Robot run on Windows.
+The controller and Git server run in containers; the Windows hardware agent
+invokes a separate Linux build container, then OpenOCD and Robot locally.
 
-## 1. Start the controller (Git Bash, repository root)
+## 1. Service hostnames and startup
 
-Start Docker Desktop in Linux-container mode first.
+The course requires these Windows hosts-file entries (administrator edit only
+if missing). They were already present during inspection:
 
-```bash
-docker info
-docker compose -f 05_Jenkins_flat/jenkins/compose.yml config --quiet
-docker compose -f 05_Jenkins_flat/jenkins/compose.yml up -d
-docker compose -f 05_Jenkins_flat/jenkins/compose.yml logs --tail=30 jenkins
+```text
+127.0.0.1 jenkins
+127.0.0.1 gogs
 ```
 
-The pinned controller image uses Jenkins 2.568.3 / Java 21. Expect Jenkins to
-finish startup and serve http://localhost:8080. Settings live in a project-scoped
-named volume. Stop with `docker compose -f 05_Jenkins_flat/jenkins/compose.yml down`;
-do not add `-v` unless you intend to erase Jenkins configuration.
-
-Read the initial password locally (do not paste it into chat):
+From the repository root in Git Bash:
 
 ```bash
-MSYS_NO_PATHCONV=1 docker compose -f 05_Jenkins_flat/jenkins/compose.yml exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
+docker compose -f 05_Jenkins_flat/jenkins/compose.yml up -d --build
 ```
 
-Unlock Jenkins, install suggested plugins (including Pipeline and Git), create
-your own administrator account and set the URL to http://localhost:8080/.
-Set the built-in node executor count to zero. Do not disable authentication.
+URLs: http://jenkins:8080/ and http://gogs:3000/. Gogs occupies port 3000; stop Gogs
+before later Selenium exercises that use the same port. Existing Jenkins named
+volume/settings are retained. `down` preserves volumes; do not use `down -v` unless
+you intend to erase accounts/configuration/repositories.
 
-## 2. Prepare Java on Windows
+## 2. Gogs initial setup
 
-The container includes its own Java, but the Windows agent needs Java 21 or newer.
-Java 17 is not suitable for this controller version.
-If Java 21 is not already installed, install it in a separate step, for example:
+Use SQLite3 with its default database path and keep the service user/repository
+path defaults. Domain: `gogs`; SSH port: `10022`; application URL:
+`http://gogs:3000/`. Set default branch `main` if offered. Create your own admin
+account privately, then an empty `RobotFramework` repository (no README).
+Do not copy personal account names, local home paths or secrets into repository docs.
 
-```bash
-winget install --exact --id EclipseAdoptium.Temurin.21.JDK
-```
+Gogs' derived Dockerfile reproduces the course's SSH listener change to 10022,
+so one SSH clone URL works from Windows and the Jenkins controller container.
+The services resolve each other by Compose service name; Windows uses hosts entries.
 
-Open a new Git Bash after installation and check:
+## 3. Repository and SSH credentials
 
-```bash
-java -version
-robot --version
-command -v git cmake ninja arm-none-eabi-gcc openocd robot
-```
+Use the SSH clone URL from your own Gogs repository. Keep `origin` pointing to
+GitHub and add a separate `gogs` remote. Do not run a placeholder URL as a command.
+After reviewing/committing the course workflow, push `main` to that remote.
+This publishes committed files only; never add agent.jar, secret-file or SSH keys.
 
-Use the same Robot installation that passed your local hardware tests.
+Follow the course credential flow: generate a dedicated keypair for Jenkins,
+register the public key in Gogs, and store the private key only in Jenkins
+Credentials as 'SSH Username with private key' (SSH username `git`). The agent's
+connection secret is unrelated to this Git credential. Do not paste either secret
+into chat or repository files. A separate user SSH key can be registered in Gogs
+for your local push. Configure Jenkins Git host-key verification for Gogs; do not
+turn verification off. The course uses Accept first connection; verify the server
+fingerprint before trusting its first connection when possible.
 
-## 3. Create the agent in Jenkins
+## 4. Existing Windows hardware agent
 
-Manage Jenkins â†’ Nodes â†’ New Node:
+Keep the agent terminal connected using Java 21 and WebSocket. Label:
+`pico-w-windows`; executors: 1. Built-in controller executors: 0. Set agent
+`COM_PORT` to the actual target USB port. The agent account needs `docker`,
+`openocd`, `robot` and Git on PATH, and access to Docker Desktop and both USB devices.
+`PICO_SDK_PATH` and `GIT_BASH` are no longer used by this pipeline, although they
+may remain useful for other jobs. Refresh/reconnect the agent after PATH changes.
+Set Jenkins' configured URL to http://jenkins:8080/ for the course hostname.
+An existing localhost WebSocket agent connection may keep working on the same PC.
 
-- Name and label: `pico-w-windows`.
-- Type: permanent agent; executors: **1**.
-- Remote root: a dedicated agent directory under your Windows user profile; enter its absolute Windows path.
-- Usage: only build jobs with matching label expressions.
-- Launch: connect agent to controller; enable **WebSocket**.
-- Node environment: `PICO_SDK_PATH` set to your SDK installation's absolute Windows path, and `COM_PORT` set to your target's serial port.
+## 5. Pipeline from Gogs
 
-Use the Windows/Git Bash connection instructions shown by that node's page to
-download agent.jar and connect with its actual secret. Do not copy a made-up
-secret or publish the node's secret. WebSocket uses port 8080, so this Compose file
-does not expose inbound-agent TCP port 50000. Keep the agent terminal running.
-Launch it under the same Windows user/environment that successfully runs the
-local workflow. Expect the node to become Online.
+Configure the job to use Git with the actual Gogs SSH clone URL, its dedicated
+Jenkins credential, branch `*/main`, and script path `05_Jenkins_flat/Jenkinsfile`.
+Both controller and agent must be able to clone this URL. Build Now replaces the
+target application. Verify the log checks out the intended Gogs commit, builds
+inside the pico service, flashes `build-docker/atcmd.elf`, and runs six tests.
 
-## 4. Create the pipeline job
+This completes the exercise 5 workflow only after that real build succeeds.
+Push hooks and Robot report graphs remain exercise 6. The instructor demo and
+submission cannot be completed by a local build alone.
 
-The current restored firmware and pipeline files must be committed and available
-in the selected remote branch before Jenkins can check them out. This setup does
-not commit or push automatically. Review the complete working-tree diff first,
-especially existing UF2 deletions and generated-file changes.
+## Current versus original service configuration
 
-Create a Pipeline job with Pipeline script from SCM, Git:
+Jenkins 2.568.3/Java 21 and Gogs 0.14.3 are pinned. Named volumes are project-scoped
+rather than global to avoid overwriting unrelated installations. Web interfaces
+and SSH bind to localhost. We use WebSocket agents instead of exposing TCP 50000.
+The source build is a separate root Compose project so finishing/stopping it does
+not stop Jenkins/Gogs. No container gets the Docker socket or Pico USB device.
 
-- Repository: your own Git repository clone URL
-- Branch: the remote branch containing the reviewed exercise 5 changes.
-- Script path: `05_Jenkins_flat/Jenkinsfile`.
-- Add read credentials only if the repository requires them.
-
-Keep Pico target USB and Debug Probe connected, close serial terminals and avoid
-other jobs/manual tests using the same hardware. Build Now will replace the target
-application. Verify Build â†’ Program Pico W â†’ Robot tests succeed, OpenOCD reports
-Verified OK, Robot reports 3 passed, and XML/HTML reports appear in artifacts.
-
-The pipeline disables concurrent builds of this job; the single-executor agent
-prevents two jobs on that agent from using the probe simultaneously. It cannot
-prevent manual programs from opening the target serial port. Robot graphs and push triggers are
-exercise 6 work. The controller and agent are not considered validated until a
-real Jenkins build completes.
-
-References: https://www.jenkins.io/doc/book/installing/docker/ and
-https://www.jenkins.io/doc/book/platform-information/support-policy-java/
+References:
+- https://www.jenkins.io/doc/book/installing/docker/
+- https://gogs.io/getting-started/installation
+- https://github.com/gogs/gogs/blob/main/docker/README.md

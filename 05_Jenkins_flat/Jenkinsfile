@@ -5,19 +5,21 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                bat 'cmake -S firmware/atcmd -B firmware/atcmd/build -G Ninja -DCMAKE_BUILD_TYPE=Debug -DPICO_BOARD=pico_w -DPICO_NO_PICOTOOL=1'
-                bat 'cmake --build firmware/atcmd/build --parallel 4'
+                bat 'docker compose -p pico-ex05-build -f docker-compose.yml up --build --abort-on-container-exit --exit-code-from pico'
+            }
+            post {
+                always { bat 'docker compose -p pico-ex05-build -f docker-compose.yml down' }
             }
         }
         stage('Program Pico W') {
             steps {
-                bat 'if not exist "firmware/atcmd/build/atcmd.elf" exit /b 2'
-                bat 'openocd -f interface/cmsis-dap.cfg -f target/rp2040.cfg -c "adapter speed 1000" -c "program firmware/atcmd/build/atcmd.elf verify reset exit"'
+                bat 'if not exist "firmware/atcmd/build-docker/atcmd.elf" exit /b 2'
+                bat 'openocd -f interface/cmsis-dap.cfg -f target/rp2040.cfg -c "adapter speed 1000" -c "program firmware/atcmd/build-docker/atcmd.elf verify reset exit"'
             }
         }
         stage('Robot tests') {
             steps {
-                bat 'robot --outputdir results/05 05_Jenkins_flat/atcmd5.robot'
+                bat 'robot --outputdir results/05 03_Setup_and_teardown_and_resources/atcmd.robot'
             }
             post {
                 always {
